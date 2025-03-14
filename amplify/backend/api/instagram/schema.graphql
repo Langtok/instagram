@@ -1,0 +1,93 @@
+type User @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  username: String! @index(name: "byUsername", queryField: "userByUsername")
+  email: String!
+  bio: String
+  avatar: String
+  isPrivate: Boolean! @default(value: "false")
+  posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+  followers: [UserFollower] @hasMany(indexName: "byFollowing", fields: ["id"])
+  following: [UserFollower] @hasMany(indexName: "byFollower", fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byUser", fields: ["id"])
+  groupMemberships: [GroupMember] @hasMany(indexName: "byUser", fields: ["id"])
+  tags: [String]
+  socialLinks: [String]
+}
+
+type Post @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  userID: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
+  owner: User @belongsTo(fields: ["userID"])
+  groupID: ID @index(name: "byGroup", sortKeyFields: ["createdAt"]) # Added field and index
+  group: Group @belongsTo(fields: ["groupID"]) # Optional: bidirectional link
+  caption: String
+  image: String
+  video: String
+  audio: String
+  type: String!
+  hashtags: [PostHashtag] @hasMany(indexName: "byPost", fields: ["id"])
+  tags: [String]
+  location: String
+  createdAt: AWSDateTime!
+  likes: [Like] @hasMany(indexName: "byPost", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+}
+
+type PostHashtag @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  postID: ID! @index(name: "byPost")
+  post: Post @belongsTo(fields: ["postID"])
+  hashtag: String! @index(name: "byHashtag", queryField: "postsByHashtag")
+}
+
+type Comment @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  postID: ID! @index(name: "byPost", sortKeyFields: ["createdAt"])
+  post: Post @belongsTo(fields: ["postID"])
+  userID: ID! @index(name: "byUser")
+  owner: User @belongsTo(fields: ["userID"])
+  content: String!
+  media: String
+  createdAt: AWSDateTime!
+}
+
+type Like @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  postID: ID! @index(name: "byPost", sortKeyFields: ["createdAt"])
+  post: Post @belongsTo(fields: ["postID"])
+  userID: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  createdAt: AWSDateTime!
+}
+
+type UserFollower @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  followerID: ID! @index(name: "byFollower", sortKeyFields: ["createdAt"])
+  follower: User @belongsTo(fields: ["followerID"])
+  followingID: ID! @index(name: "byFollowing", sortKeyFields: ["createdAt"])
+  following: User @belongsTo(fields: ["followingID"])
+  createdAt: AWSDateTime!
+}
+
+type Group @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  name: String!
+  avatar: String
+  members: [GroupMember] @hasMany(indexName: "byGroup", fields: ["id"])
+  posts: [Post] @hasMany(indexName: "byGroup", fields: ["id"]) # Now matches the index
+  createdAt: AWSDateTime!
+}
+
+type GroupMember @model @auth(rules: [{ allow: owner }, { allow: public, operations: [read] }]) {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  groupID: ID! @index(name: "byGroup", sortKeyFields: ["createdAt"])
+  group: Group @belongsTo(fields: ["groupID"])
+  createdAt: AWSDateTime!
+}
+
+type Query {
+  popularHashtags: [String]
+}

@@ -1,0 +1,95 @@
+/* src/components/Post.css */
+.post {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    max-width: 614px;
+  }
+  
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+  }
+  
+  .post-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  .delete-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #262626;
+    cursor: pointer;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .post-actions {
+    display: flex;
+    gap: 16px;
+    padding: 6px 16px;
+  }
+  
+  .post-actions button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #262626;
+    cursor: pointer;
+  }
+  
+  .icon-like::before { content: '❤️'; }
+  .icon-comment::before { content: '💬'; }
+  
+  .post-likes {
+    padding: 0 16px 8px;
+    font-weight: 600;
+  }
+  
+  .post-content {
+    padding: 0 16px 8px;
+  }
+  
+  .hashtags {
+    color: #00376b;
+  }
+  
+  .post-content span {
+    color: #8e8e8e;
+    font-size: 12px;
+  }
+  
+  .comment-input {
+    display: flex;
+    padding: 8px 16px;
+    border-top: 1px solid #efefef;
+  }
+  
+  .comment-input input {
+    flex: 1;
+    border: none;
+    font-size: 14px;
+  }
+  
+  .comment-input button {
+    background: none;
+    border: none;
+    color: #0095f6;
+    font-weight: 600;
+    cursor: pointer;
+  }

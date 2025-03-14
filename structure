@@ -1,0 +1,44 @@
+my-instagram-clone/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── Login.js
+│   │   ├── Login.css
+│   │   ├── Signup.js
+│   │   ├── Signup.css
+│   │   ├── PostCreator.js
+│   │   ├── PostCreator.css
+│   │   ├── Post.js
+│   │   ├── Post.css
+│   │   ├── Profile.js
+│   │   ├── Profile.css
+│   │   ├── Comment.js
+│   │   ├── Comment.css
+│   │   ├── VideoPlayer.js
+│   │   ├── VideoPlayer.css
+│   │   ├── AudioPlayer.js
+│   │   ├── AudioPlayer.css
+│   │   ├── NotificationBar.js
+│   │   ├── NotificationBar.css
+│   │   ├── SearchBar.js
+│   │   ├── SearchBar.css
+│   │   └── [other components...]
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── Explore.js
+│   │   ├── ProfilePage.js
+│   │   ├── About.js
+│   │   ├── Help.js
+│   │   ├── NotFound.js
+│   │   └── [other pages...]
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   └── amplify/
+│       └── [Amplify config files]
+├── .gitignore
+├── README.md
+├── package.json
+└── my_instagram_url.txt

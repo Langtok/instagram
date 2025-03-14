@@ -1,66 +1,49 @@
 // src/components/Signup.js
-import { signUp } from '@aws-amplify/auth';
-import { generateClient } from '@aws-amplify/api';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Add this
-import { userByUsername } from '../graphql/queries';
+import { signUp } from '@aws-amplify/auth';
+import { useNavigate } from 'react-router-dom';
 import './Signup.css';
-
-const client = generateClient();
 
 const Signup = ({ onSignup }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userExists, setUserExists] = useState(false);
-  const navigate = useNavigate(); // Add this
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const checkEmail = async (value) => {
-    setEmail(value);
-    try {
-      const { data } = await client.graphql({ query: userByUsername, variables: { username: value } });
-      setUserExists(!!data.userByUsername);
-    } catch (error) {
-      setUserExists(false);
-    }
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
-  const handleSignup = async () => {
-    if (userExists) {
-      alert('Email already taken');
-      return;
-    }
     try {
-      const response = await signUp({
-        username: email,
-        password,
-        attributes: { email }
-      });
-      console.log('Signup response:', response);
-      alert('Signup successful! Please check your email for a verification code.');
-      navigate('/confirm', { state: { email } }); // Redirect to confirm page
-    } catch (error) {
-      console.error('Signup failed:', error);
-      alert('Signup failed: ' + error.message);
+      await signUp({ username: email, password });
+      onSignup();
+      navigate('/confirm', { state: { email } });
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
-    <div className="signup">
-      <h1 className="signup-logo">Instagram</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => checkEmail(e.target.value)}
-      />
-      {userExists && <p className="error">Email already taken</p>}
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleSignup}>Sign Up</button>
+    <div className="signup-container">
+      <h2>Sign Up</h2>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Sign Up</button>
+      </form>
     </div>
   );
 };

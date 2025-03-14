@@ -1,42 +1,71 @@
 /* src/components/Signup.css */
-.signup {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.signup-container {
     width: 350px;
-    padding: 20px;
-    background-color: #fff;
+    margin: 50px auto;
+    padding: 40px;
+    background: white;
     border: 1px solid #dbdbdb;
-    border-radius: 1px;
-  }
-  
-  .signup-logo {
-    font-family: 'Billabong', cursive;
-    font-size: 48px;
     text-align: center;
-    color: #262626;
-  }
-  
-  input {
-    padding: 9px 0 7px 8px;
-    font-size: 16px;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    background-color: #fafafa;
-  }
-  
-  button {
-    padding: 5px 9px;
-    background-color: #0095f6;
-    color: #fff;
-    border: none;
     border-radius: 8px;
-    font-weight: 600;
+  }
+  
+  .signup-container h2 {
+    font-family: 'Proxima Nova', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .signup-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    background: #fafafa;
+    font-size: 14px;
+    font-family: 'Proxima Nova', sans-serif;
+  }
+  
+  .signup-container input:focus {
+    border-color: #3897f0;
+    outline: none;
+  }
+  
+  .signup-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3897f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
   }
   
-  .error {
-    color: #ed4956;
-    font-size: 12px;
-    text-align: center;
+  .signup-container button:hover {
+    background-color: #3578e5;
   }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .signup-container p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .signup-container a {
+    color: #3897f0;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup-container a:hover {
+    text-decoration: underline;
+  }
+  

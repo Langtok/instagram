@@ -1,59 +1,60 @@
 // src/components/Login.js
-import { signIn } from '@aws-amplify/auth';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signIn } from '@aws-amplify/auth';
 import './Login.css';
+import instaLogo from '../assets/instagram-logo.png'; // Add the logo
 
 const Login = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      alert('Please enter both email and password');
-      return;
-    }
-    const payload = { username: email, password };
-    console.log('Login attempt with:', payload);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
     try {
-      const response = await signIn(payload);
-      console.log('Login response:', response);
-      if (response.isSignedIn) {
-        onLogin(); // Only proceed if signed in
-      } else if (response.nextStep.signInStep === 'CONFIRM_SIGN_UP') {
-        console.log('User not confirmed, redirecting to confirm page for:', email);
-        navigate('/confirm', { state: { email } });
-      } else {
-        alert('Login incomplete: ' + (response.nextStep.signInStep || 'Unknown step'));
-      }
-    } catch (error) {
-      console.error('Login failed - Full error:', JSON.stringify(error, null, 2));
-      if (error.code === 'UserNotConfirmedException') {
-        console.log('Redirecting to confirm page for:', email);
-        navigate('/confirm', { state: { email } });
-      } else {
-        alert('Login failed: ' + (error.code ? `${error.code}: ${error.message}` : JSON.stringify(error)));
-      }
+      await signIn({ username: formData.username, password: formData.password });
+      onLogin();
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
-    <div className="login">
-      <h1 className="login-logo">Instagram</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Log In</button>
+    <div className="auth-page">
+      <div className="login-container">
+        <img src={instaLogo} alt="Instagram Logo" className="insta-logo" />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Log In</button>
+          {error && <p className="error">{error}</p>}
+        </form>
+      </div>
+      <div className="signup-link">
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      </div>
     </div>
   );
 };

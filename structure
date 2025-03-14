@@ -8,6 +8,8 @@ my-instagram-clone/
 │   │   ├── Login.css
 │   │   ├── Signup.js
 │   │   ├── Signup.css
+│   │   ├── Confirm.js
+│   │   ├── Confirm.css
 │   │   ├── PostCreator.js
 │   │   ├── PostCreator.css
 │   │   ├── Post.js
@@ -27,10 +29,14 @@ my-instagram-clone/
 │   │   └── [other components...]
 │   ├── pages/
 │   │   ├── Home.js
+│   │   ├── Home.css
 │   │   ├── Explore.js
+│   │   ├── Explore.css
 │   │   ├── ProfilePage.js
+│   │   ├── ProfilePage.css
 │   │   ├── About.js
 │   │   ├── Help.js
+│   │   ├── Page.css
 │   │   ├── NotFound.js
 │   │   └── [other pages...]
 │   ├── App.js

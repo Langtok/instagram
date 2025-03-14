@@ -1,44 +1,44 @@
 // src/components/Confirm.js
 import { useState } from 'react';
-import { confirmSignUp, resendSignUpCode } from '@aws-amplify/auth';
-import './Confirm.css'; // Create this file for styling
+import { confirmSignUp } from '@aws-amplify/auth';
+import { useNavigate, useLocation } from 'react-router-dom';
+import './Confirm.css';
 
-const Confirm = ({ email, onConfirm }) => {
+const Confirm = ({ onConfirm }) => {
   const [code, setCode] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email || '';
 
-  const handleConfirm = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
     try {
       await confirmSignUp({ username: email, confirmationCode: code });
-      alert('Account confirmed successfully!');
-      onConfirm(); // Trigger login or redirect
-    } catch (error) {
-      console.error('Confirmation failed:', error);
-      alert('Confirmation failed: ' + (error.message || 'Unknown error'));
-    }
-  };
-
-  const handleResendCode = async () => {
-    try {
-      await resendSignUpCode({ username: email });
-      alert('A new verification code has been sent to your email.');
-    } catch (error) {
-      console.error('Resend code failed:', error);
-      alert('Failed to resend code: ' + (error.message || 'Unknown error'));
+      onConfirm();
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   return (
-    <div className="confirm">
-      <h1 className="confirm-logo">Instagram</h1>
-      <p>Please enter the verification code sent to {email}</p>
-      <input
-        type="text"
-        placeholder="Verification Code"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
-      <button onClick={handleConfirm}>Confirm</button>
-      <button onClick={handleResendCode}>Resend Code</button>
+    <div className="confirm-container">
+      <h2>Confirm Signup</h2>
+      <p>Enter the code sent to {email}</p>
+      {error && <p className="error">{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Confirmation Code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          required
+        />
+        <button type="submit">Confirm</button>
+      </form>
     </div>
   );
 };

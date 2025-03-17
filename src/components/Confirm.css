@@ -1,41 +1,74 @@
-/* src/components/Confirm.css */
-.confirm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #fff;
-    padding: 20px;
-  }
-  
-  .confirm-logo {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .confirm input {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-  }
-  
-  .confirm button {
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #3897f0;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .confirm button:hover {
-    background-color: #357abd;
-  }
+/* General styles */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: black;
+}
+
+.auth-left {
+  display: none;
+}
+
+.auth-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #222;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.login-box,
+.signup-box,
+.confirm-box {
+  text-align: center;
+  width: 100%;
+}
+
+h1 {
+  font-family: 'Billabong', cursive;
+  font-size: 50px;
+  color: white;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background: #333;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #0095f6;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0077cc;
+}
+
+.divider {
+  margin: 10px 0;
+  color: white;
+}
+
+.forgot-password,
+.signup-box a,
+.login-box a {
+  color: #0095f6;
+  text-decoration: none;
+}
+
+.error {
+  color: red;
+}

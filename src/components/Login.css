@@ -1,77 +1,159 @@
-/* src/components/Login.css */
-.auth-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: url('../assets/instagram-bg.png') no-repeat center center;
-    background-size: cover;
-  }
-  
-  .login-container {
-    width: 350px;
-    padding: 40px;
-    background: white;
-    border: 1px solid #dbdbdb;
-    text-align: center;
-    border-radius: 8px;
-  }
-  
-  .insta-logo {
-    width: 180px;
-    margin-bottom: 20px;
-  }
-  
-  .login-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #dbdbdb;
-    border-radius: 5px;
-    background: #fafafa;
-    font-size: 14px;
-  }
-  
-  .login-container button {
-    width: 100%;
-    padding: 12px;
-    background-color: #3897f0;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .login-container button:hover {
-    background-color: #3578e5;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .signup-link {
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  .signup-link a {
-    color: #3897f0;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .signup-link a:hover {
-    text-decoration: underline;
-  }
-  
+/* Main container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: black;
+}
+
+/* Left-Side Image Section */
+.auth-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 400px;
+  height: 550px; /* Ensure visibility */
+}
+
+.auth-left img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block; /* Ensure it's visible */
+}
+
+/* Right-Side Login Section */
+.auth-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 350px;
+}
+
+/* Login Box */
+.login-box {
+  background-color: #121212;
+  width: 100%;
+  max-width: 350px;
+  padding: 30px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #262626;
+}
+
+/* Instagram Logo */
+.instagram-logo {
+  font-family: 'Billabong', cursive;
+  font-size: 50px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+input {
+  width: calc(100% - 4px); /* Ensure same width as login button */
+  padding: 12px;
+  margin: 8px 0;
+  background: #262626;
+  border: 1px solid #444;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box; /* Fix width issue */
+}
+
+/* Focus effect */
+input:focus {
+  border: 1px solid #0095f6;
+  background: #333;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0095f6;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.login-btn:hover {
+  background: #0084d6;
+}
+
+/* OR Divider */
+.or-divider {
+  display: flex;
+  align-items: center;
+  color: gray;
+  margin: 15px 0;
+}
+
+.or-divider span {
+  flex: 1;
+  height: 1px;
+  background: gray;
+  margin: 0 10px;
+}
+
+/* Facebook Login */
+.facebook-login {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 1px solid #1877f2;
+  color: #1877f2;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.facebook-login:hover {
+  background: rgba(24, 119, 242, 0.2);
+}
+
+/* Forgot Password */
+.forgot-password {
+  display: block;
+  color: #b3b3b3;
+  font-size: 14px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Sign Up Box */
+.signup-box {
+  background: #121212;
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  margin-top: 10px;
+  border: 1px solid #262626;
+}
+
+/* Get the App Section */
+.get-the-app {
+  text-align: center;
+  color: white;
+  margin-top: 15px;
+}
+
+.app-buttons img {
+  width: 120px;
+  margin: 5px;
+}
